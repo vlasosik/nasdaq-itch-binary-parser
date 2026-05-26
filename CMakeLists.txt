@@ -8,5 +8,5 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 include(cmake/StandartProjectSettings.cmake)
 
-add_executable(exe main.cpp)
+add_executable(exe src/main.cpp)
 
