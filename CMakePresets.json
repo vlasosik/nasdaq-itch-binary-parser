@@ -1,0 +1,101 @@
+{
+  "version": 4,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 8,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "base",
+      "hidden": true,
+      "generator": "Ninja",
+      "cacheVariables": {
+        "CMAKE_MAKE_PROGRAM": "ninja"
+      }
+    },
+    {
+      "name": "base-debug",
+      "hidden": true,
+      "inherits": "base",
+      "binaryDir": "${sourceDir}/cmake-build-debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "DEBUG": "ON"
+      }
+    },
+    {
+      "name": "base-release",
+      "hidden": true,
+      "inherits": "base",
+      "binaryDir": "${sourceDir}/cmake-build-release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "debug",
+      "displayName": "Debug",
+      "inherits": "base-debug"
+    },
+    {
+      "name": "debug-asan",
+      "displayName": "Debug + ASAN",
+      "inherits": "base-debug",
+      "binaryDir": "${sourceDir}/cmake-build-debug-asan",
+      "cacheVariables": {
+        "SANITIZE": "ASAN"
+      }
+    },
+    {
+      "name": "debug-tsan",
+      "displayName": "Debug + TSAN",
+      "inherits": "base-debug",
+      "binaryDir": "${sourceDir}/cmake-build-debug-tsan",
+      "cacheVariables": {
+        "SANITIZE": "TSAN"
+      }
+    },
+    {
+      "name": "debug-msan",
+      "displayName": "Debug + MSAN",
+      "inherits": "base-debug",
+      "binaryDir": "${sourceDir}/cmake-build-debug-msan",
+      "cacheVariables": {
+        "SANITIZE": "MSAN"
+      }
+    },
+    {
+      "name": "release",
+      "displayName": "Release",
+      "inherits": "base-release"
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "debug",
+      "displayName": "debug",
+      "configurePreset": "debug"
+    },
+    {
+      "name": "debug-asan",
+      "displayName": "debug-asan",
+      "configurePreset": "debug-asan"
+    },
+    {
+      "name": "debug-tsan",
+      "displayName": "debug-tsan",
+      "configurePreset": "debug-tsan"
+    },
+    {
+      "name": "debug-msan",
+      "displayName": "debug-msan",
+      "configurePreset": "debug-msan"
+    },
+    {
+      "name": "release",
+      "displayName": "release",
+      "configurePreset": "release"
+    }
+  ]
+}
