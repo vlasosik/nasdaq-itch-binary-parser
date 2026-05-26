@@ -1,0 +1,61 @@
+# version control
+.git
+.gitignore
+.svn
+.hg
+
+# build artifacts & temporary files
+.cache/
+.vagrant/
+cache/
+compile_commands.json
+export/
+build/
+bin/
+obj/
+out/
+dist/
+*.o
+*.a
+*.so
+*.out
+*.log
+
+# IDE & editor specific
+# VS Code
+.vscode/
+.history/
+# Visual Studio
+.vs/
+*.user
+*.suo
+# CLion / JetBrains
+.idea/
+cmake-build-*/
+
+*.swp
+*.swo
+
+# package managers & dependencies
+vcpkg_installed/
+
+# documentation & metadata
+docs/
+README.md
+CONTRIBUTING.md
+LICENSE
+.clang-format
+.clang-tidy
+
+# CMake
+cmake/docs
+cmake/README.md
+
+# CI
+ci/Makefile
+ci/docker
+ci/docs
+ci/cache
+
+# env
+env
