@@ -1,0 +1,12 @@
+{
+  "name": "nasdaq-itch-parser",
+  "version": "0.1",
+  "builtin-baseline": "10ceb139a610ebf3c6aa49cdc4a4b7f3db5d3f2b",
+  "dependencies": [
+    "gtest",
+    "benchmark",
+    "quill",
+    "fmt",
+    "zlib"
+  ]
+}
