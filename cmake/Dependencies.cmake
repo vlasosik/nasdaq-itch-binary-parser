@@ -1,0 +1,5 @@
+find_package(GTest CONFIG REQUIRED)
+find_package(benchmark CONFIG REQUIRED)
+find_package(quill CONFIG REQUIRED)
+find_package(fmt CONFIG REQUIRED)
+find_package(ZLIB REQUIRED)
