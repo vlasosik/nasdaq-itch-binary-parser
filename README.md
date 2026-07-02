@@ -66,4 +66,4 @@ gunzip -k data/08302019.NASDAQ_ITCH50.gz
 ```
 
 The `-k` flag keeps the original `.gz` file. The parser expects the
-uncompressed file at:
+uncompressed file at: data/uncompressed_file
