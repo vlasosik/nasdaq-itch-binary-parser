@@ -1,27 +1,27 @@
 #include "itch_parser.hxx"
 
-itch_message itch_parser::parse(std::vector<std::byte> &stream) {
-    switch (static_cast<char>(stream[0])) {
+itch_message itch_parser::parse(bytes_view message) {
+    switch (static_cast<char>(message[0])) {
         case 'S':
-            return {parse_system_message(stream)};
+            return {parse_system_message(message)};
         case 'R':
-            return {parse_stock_directory(stream)};
+            return {parse_stock_directory(message)};
         case 'H':
-            return {parse_stock_trading_action(stream)};
+            return {parse_stock_trading_action(message)};
         case 'A':
-            return {parse_add_order_no_mpid(stream)};
+            return {parse_add_order_no_mpid(message)};
         case 'F':
-            return {parse_add_order_mpid(stream)};
+            return {parse_add_order_mpid(message)};
         case 'E':
-            return {parse_order_executed(stream)};
+            return {parse_order_executed(message)};
         case 'C':
-            return {parse_order_executed_with_price(stream)};
+            return {parse_order_executed_with_price(message)};
         case 'X':
-            return {parse_order_cancel(stream)};
+            return {parse_order_cancel(message)};
         case 'D':
-            return {parse_order_delete(stream)};
+            return {parse_order_delete(message)};
         case 'U':
-            return {parse_order_replace(stream)};
+            return {parse_order_replace(message)};
         default:
             return {};
     }
@@ -42,9 +42,9 @@ uint64_t itch_parser::decode_timestamp() {
     return value;
 }
 
-system_event_message itch_parser::parse_system_message(std::vector<std::byte> &stream) {
-    start = stream.data();
-    end = stream.data() + stream.size();
+system_event_message itch_parser::parse_system_message(bytes_view payload) {
+    start = payload.data();
+    end = payload.data() + payload.size();
 
     system_event_message msg{};
     msg.message_type = decode<uint8_t>();
@@ -56,9 +56,9 @@ system_event_message itch_parser::parse_system_message(std::vector<std::byte> &s
     return msg;
 }
 
-stock_directory itch_parser::parse_stock_directory(std::vector<std::byte> &byte) {
-    start = byte.data();
-    end = byte.data() + byte.size();
+stock_directory itch_parser::parse_stock_directory(bytes_view payload) {
+    start = payload.data();
+    end = payload.data() + payload.size();
 
     stock_directory msg{};
     msg.message_type = decode<uint8_t>();
@@ -83,9 +83,9 @@ stock_directory itch_parser::parse_stock_directory(std::vector<std::byte> &byte)
     return msg;
 }
 
-stock_trading_action itch_parser::parse_stock_trading_action(std::vector<std::byte> &byte) {
-    start = byte.data();
-    end = byte.data() + byte.size();
+stock_trading_action itch_parser::parse_stock_trading_action(bytes_view payload) {
+    start = payload.data();
+    end = payload.data() + payload.size();
 
     stock_trading_action msg{};
     msg.message_type = decode<uint8_t>();
@@ -100,9 +100,9 @@ stock_trading_action itch_parser::parse_stock_trading_action(std::vector<std::by
     return msg;
 }
 
-add_order_no_mpid itch_parser::parse_add_order_no_mpid(std::vector<std::byte> &byte) {
-    start = byte.data();
-    end = byte.data() + byte.size();
+add_order_no_mpid itch_parser::parse_add_order_no_mpid(bytes_view payload) {
+    start = payload.data();
+    end = payload.data() + payload.size();
 
     add_order_no_mpid msg{};
     msg.message_type = decode<uint8_t>();
@@ -118,9 +118,9 @@ add_order_no_mpid itch_parser::parse_add_order_no_mpid(std::vector<std::byte> &b
     return msg;
 }
 
-add_order_mpid itch_parser::parse_add_order_mpid(std::vector<std::byte> &byte) {
-    start = byte.data();
-    end = byte.data() + byte.size();
+add_order_mpid itch_parser::parse_add_order_mpid(bytes_view payload) {
+    start = payload.data();
+    end = payload.data() + payload.size();
 
     add_order_mpid msg{};
     msg.message_type = decode<uint8_t>();
@@ -137,9 +137,9 @@ add_order_mpid itch_parser::parse_add_order_mpid(std::vector<std::byte> &byte) {
     return msg;
 }
 
-order_executed itch_parser::parse_order_executed(std::vector<std::byte> &byte) {
-    start = byte.data();
-    end = byte.data() + byte.size();
+order_executed itch_parser::parse_order_executed(bytes_view payload) {
+    start = payload.data();
+    end = payload.data() + payload.size();
 
     order_executed msg{};
     msg.message_type = decode<uint8_t>();
@@ -153,9 +153,9 @@ order_executed itch_parser::parse_order_executed(std::vector<std::byte> &byte) {
     return msg;
 }
 
-order_executed_with_price itch_parser::parse_order_executed_with_price(std::vector<std::byte> &byte) {
-    start = byte.data();
-    end = byte.data() + byte.size();
+order_executed_with_price itch_parser::parse_order_executed_with_price(bytes_view payload) {
+    start = payload.data();
+    end = payload.data() + payload.size();
 
     order_executed_with_price msg{};
     msg.message_type = decode<uint8_t>();
@@ -171,9 +171,9 @@ order_executed_with_price itch_parser::parse_order_executed_with_price(std::vect
     return msg;
 }
 
-order_cancel itch_parser::parse_order_cancel(std::vector<std::byte> &byte) {
-    start = byte.data();
-    end = byte.data() + byte.size();
+order_cancel itch_parser::parse_order_cancel(bytes_view payload) {
+    start = payload.data();
+    end = payload.data() + payload.size();
 
     order_cancel msg{};
     msg.message_type = decode<uint8_t>();
@@ -186,9 +186,9 @@ order_cancel itch_parser::parse_order_cancel(std::vector<std::byte> &byte) {
     return msg;
 }
 
-order_delete itch_parser::parse_order_delete(std::vector<std::byte> &byte) {
-    start = byte.data();
-    end = byte.data() + byte.size();
+order_delete itch_parser::parse_order_delete(bytes_view payload) {
+    start = payload.data();
+    end = payload.data() + payload.size();
 
     order_delete msg{};
     msg.message_type = decode<uint8_t>();
@@ -200,9 +200,9 @@ order_delete itch_parser::parse_order_delete(std::vector<std::byte> &byte) {
     return msg;
 }
 
-order_replace itch_parser::parse_order_replace(std::vector<std::byte> &byte) {
-    start = byte.data();
-    end = byte.data() + byte.size();
+order_replace itch_parser::parse_order_replace(bytes_view payload) {
+    start = payload.data();
+    end = payload.data() + payload.size();
 
     order_replace msg{};
     msg.message_type = decode<uint8_t>();
